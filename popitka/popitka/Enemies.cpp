@@ -42,5 +42,9 @@ Girl::Girl(int x, int y)
 
 Boy::Boy(int x, int y) 
 {
-
+	t.loadFromFile("images/boy.png");
+	sprite.setTexture(t);
+	sprite.setTextureRect(IntRect(0, 0, 23, 23));
+	rect = FloatRect(x * 32, y * 32, 0, 0);
+	dy = -0.08;
 }
