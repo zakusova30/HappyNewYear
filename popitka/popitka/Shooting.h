@@ -6,7 +6,7 @@
 
 using namespace sf;
 
-
+// обстрел пулями
 class Shooting {
 public:
 
@@ -47,7 +47,7 @@ public:
 		int direction;
 		float dx, dy;
 		Bullet(FloatRect rect, float loc_dx);
-		void WithMap(); //взаимодействие с картой
+		void WithMap(); 
 		~Bullet();
 
 		void WithPlayer(Player &p);
@@ -58,7 +58,7 @@ public:
 
 };
 
-
+//стрелок
 class Shoot : public Shooting {
 public:
 
