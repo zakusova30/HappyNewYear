@@ -2,7 +2,7 @@
 #include <iostream> 
 #include "map.h" 
 #include "globals.h" 
-#include "Enemys.h" 
+#include "Enemies.h" 
 #include "player.h" 
 #include "Shooting.h"
 
