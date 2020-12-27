@@ -54,3 +54,22 @@ void Shooting::Bullet::drawing() {
 
 	window.draw(sprite);
 }
+
+//пуля попала в стену
+void Shooting::Bullet::WithMap() {
+
+	for (int i = (bullet_rect.top) / 32; i < (bullet_rect.top + 32) / 32; i++)
+		for (int j = (bullet_rect.left) / 32; j < (bullet_rect.left + 32) / 32; j++)
+		{
+			if (TileMap[i][j] == '0' || TileMap[i][j] == 'e' || TileMap[i][j] == '1')
+			{
+				life = false;
+			}
+		}
+
+}
+
+
+Shooting::Bullet::~Bullet() {
+
+}
