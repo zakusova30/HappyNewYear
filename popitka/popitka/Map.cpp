@@ -25,6 +25,78 @@ Map::Map() { //конструктор
 Map::~Map() { // деструктор
 
 }
+void Map::drawing() {
+	for (int i = 0; i < HEIGHT_MAP; i++) // рисуем карту по высоте и по ширине 
+		for (int j = 0; j < WIDTH_MAP; j++)
+		{
+			// ниже рисуется карта по символам (смотреть ниже этого кода) поэтому когда тот символ равен тому то то рисуется опр элемент 
+			if (TileMap[i][j] == ' ')  s_map.setTextureRect(IntRect(0, 32, 32, 32));//дорога
+			if (TileMap[i][j] == '2')  s_map.setTextureRect(IntRect(32, 32, 32, 32)); //деревянный пол
+			if ((TileMap[i][j] == '0')) s_map.setTextureRect(IntRect(0, 0, 32, 32));//если встретили символ 0, то рисуем 3й квадратик
+
+			if ((TileMap[i][j] == 'q')) s_map.setTextureRect(IntRect(0, 96, 32, 32));//ковер
+			if ((TileMap[i][j] == 'r')) s_map.setTextureRect(IntRect(0, 128, 32, 32));//ковер
+
+			//дверь
+			if ((TileMap[i][j] == '!')) s_map.setTextureRect(IntRect(32, 32, 32, 32)); //дверь
+			if ((TileMap[i][j] == '@')) s_map.setTextureRect(IntRect(32, 32, 32, 32)); //дверь
+			if ((TileMap[i][j] == '$')) s_map.setTextureRect(IntRect(32, 32, 32, 32)); //дверь
+			if ((TileMap[i][j] == 'k')) s_map.setTextureRect(IntRect(128, 64, 32, 32)); //дверь
+			if ((TileMap[i][j] == '8')) s_map.setTextureRect(IntRect(128, 0, 32, 32)); //дверь
+			if ((TileMap[i][j] == '9')) s_map.setTextureRect(IntRect(128, 32, 32, 32)); //дверь
+
+
+			if ((TileMap[i][j] == '1')) s_map.setTextureRect(IntRect(128, 96, 32, 32)); //крыша
+
+			if ((TileMap[i][j] == 'w')) s_map.setTextureRect(IntRect(96, 32, 32, 32)); //стена ->
+			if ((TileMap[i][j] == 'e')) s_map.setTextureRect(IntRect(0, 64, 32, 32)); //стена |
+			if ((TileMap[i][j] == 'y')) s_map.setTextureRect(IntRect(32, 64, 32, 32)); //стена |
+			if ((TileMap[i][j] == 't')) s_map.setTextureRect(IntRect(96, 96, 32, 32)); //стена |
+			if ((TileMap[i][j] == 'r')) s_map.setTextureRect(IntRect(0, 128, 32, 32)); //стена L
+
+			//камин
+			if ((TileMap[i][j] == '^')) s_map.setTextureRect(IntRect(128, 128, 32, 32));//вверх
+			if ((TileMap[i][j] == '>')) s_map.setTextureRect(IntRect(128, 160, 32, 32));//вниз
+			if ((TileMap[i][j] == 'x')) s_map.setTextureRect(IntRect(96, 160, 32, 32));//вправо
+
+			//ель
+			if ((TileMap[i][j] == 'n')) s_map.setTextureRect(IntRect(32, 96, 32, 32));//вверх
+			if ((TileMap[i][j] == 'm')) s_map.setTextureRect(IntRect(32, 128, 32, 32));//вниз
+			if ((TileMap[i][j] == '/')) s_map.setTextureRect(IntRect(64, 128, 32, 32)); //стена ->
+
+			if ((TileMap[i][j] == 'Z')) s_map.setTextureRect(IntRect(64, 192, 32, 32));
+			if ((TileMap[i][j] == 'Y')) s_map.setTextureRect(IntRect(96, 192, 32, 32));
+			if ((TileMap[i][j] == '&')) s_map.setTextureRect(IntRect(128, 192, 32, 32));
+			if ((TileMap[i][j] == '%')) s_map.setTextureRect(IntRect(128, 224, 32, 32));
+
+
+			if ((TileMap[i][j] == '(')) s_map.setTextureRect(IntRect(0, 229, 32, 32));
+			//труба
+			if ((TileMap[i][j] == 'j')) s_map.setTextureRect(IntRect(64, 160, 32, 32));//вверх
+			if ((TileMap[i][j] == '3')) s_map.setTextureRect(IntRect(64, 160, 32, 32));//вверх
+			if ((TileMap[i][j] == '4')) s_map.setTextureRect(IntRect(64, 160, 32, 32));//вверх
+			if ((TileMap[i][j] == '5')) s_map.setTextureRect(IntRect(64, 160, 32, 32));//вверх
+
+
+			//лестница
+			if ((TileMap[i][j] == 'a')) s_map.setTextureRect(IntRect(32, 160, 32, 32));//вверх
+			if ((TileMap[i][j] == '6')) s_map.setTextureRect(IntRect(64, 0, 32, 32));//вверх
+			if ((TileMap[i][j] == '7')) s_map.setTextureRect(IntRect(32, 0, 32, 32));//вверх
+
+			//выход
+			if ((TileMap[i][j] == '.')) s_map.setTextureRect(IntRect(0, 32, 32, 32));//вверх
+			if ((TileMap[i][j] == '|')) s_map.setTextureRect(IntRect(32, 196, 32, 32));//вверх
+			if ((TileMap[i][j] == '-')) s_map.setTextureRect(IntRect(0, 260, 32, 32));//вверх
+			if ((TileMap[i][j] == ',')) s_map.setTextureRect(IntRect(0, 196, 32, 32));//вверх
+			s_map.setPosition(j * 32, i * 32);
+
+			window.draw(s_map);
+
+
+		}
+
+
+}
 String TileMap[HEIGHT_MAP] = { // сами символы карты
 
 	"0000000000000000000000000000000000000000000",
