@@ -48,6 +48,22 @@ Player::Player(String File, float X, float Y, float W, float H)
 
 void Player::update(float time)
 {
+	switch (dir)
+	{
+	case 0: dx = speed; dy = 0;   break;
+	case 1: dx = -speed; dy = 0;   break;
+	case 2: dx = 0; dy = speed;   break;
+	case 3: dx = 0; dy = -speed;   break;
+	}
+
+	x += dx * time;
+	y += dy * time;
+
+
+	speed = 0;
+	sprite.setPosition(x, y);
+	hpbar.setSize(Vector2f((float)hp * 1.f, 10.f));
+	keybar.setSize(Vector2f((float)key * 70.f, 10.f));
 }
 
 void Player::draw_p() 
@@ -81,4 +97,6 @@ void Player::bDamage()
 
 void Player::Keys() 
 {
+	key++;
+	return;
 }
