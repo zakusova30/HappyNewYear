@@ -46,11 +46,13 @@ public:
 
 		int direction;
 		float dx, dy;
-		Bullet(FloatRect rect, float loc_dx);
-		void WithMap(); 
+
+		Bullet(FloatRect rect, float loc_dx);		
 		~Bullet();
 
-		void WithPlayer(Player &p);
+		void WithMap();//прототип функции проверки на попадание в стену 
+		void WithPlayer(Player &p);//прототип функции проверки на попадание в игрока
+
 		void drawing();
 
 	};
@@ -62,6 +64,6 @@ public:
 class Shoot : public Shooting {
 public:
 
-	Shoot(int x, int y);
+	Shoot(int x, int y);// конструктор
 
 };

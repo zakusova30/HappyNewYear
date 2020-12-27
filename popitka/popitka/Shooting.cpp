@@ -17,13 +17,16 @@ Shoot::Shoot(int x, int y) {
 
 void Shooting::draw()
 {
-	sprite.setPosition(rect.left, rect.top); 
-	window.draw(sprite);
+	sprite.setPosition(rect.left, rect.top); //получение местоположения стрелка
+	window.draw(sprite); //отрисовка стрелка
 }
 
+//получение местоположения стрелка
 FloatRect Shooting::position() {
 	return rect;
 }
+
+//получение сдвига ля пули
 float Shooting::acceleration() { 
 	return dx;
 }
@@ -47,29 +50,39 @@ void Shooting::Bullet::drawing() {
 
 	time = time / 400;
 
-	sprite.setPosition(bullet_rect.left, bullet_rect.top);
-	bullet_rect.left = bullet_rect.left + dx * time;
+	sprite.setPosition(bullet_rect.left, bullet_rect.top); // получение местоположения пули
+	bullet_rect.left = bullet_rect.left + dx * time; //сдвиг пули
 
-	WithMap();
+	WithMap(); //проверка на попадание в стену
 
-	window.draw(sprite);
+	window.draw(sprite); //отрисовка пули
 }
 
 //пуля попала в стену
 void Shooting::Bullet::WithMap() {
-
+	// сравнение положения пули и стены
 	for (int i = (bullet_rect.top) / 32; i < (bullet_rect.top + 32) / 32; i++)
 		for (int j = (bullet_rect.left) / 32; j < (bullet_rect.left + 32) / 32; j++)
 		{
 			if (TileMap[i][j] == '0' || TileMap[i][j] == 'e' || TileMap[i][j] == '1')
 			{
-				life = false;
+				life = false; //уничтожение пули
 			}
 		}
 
 }
 
-
+// деструктор пули
 Shooting::Bullet::~Bullet() {
 
+}
+
+// пуля попадает в игрока
+void Shooting::Bullet::WithPlayer(Player &p) {
+	// сравниваем положение игрока и пули
+	if ((((p.GetPlayerCoordinateX()) >= ((bullet_rect.left))) && ((p.GetPlayerCoordinateX()) <= ((bullet_rect.left) + 10))) && (((p.GetPlayerCoordinateY()) >= (bullet_rect.top)) && ((p.GetPlayerCoordinateY()) <= (bullet_rect.top) + 32))) {
+		life = false; //уничтожение пули
+		p.bDamage();//уменьшение здоровья
+		return;
+	}
 }
