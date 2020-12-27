@@ -7,7 +7,7 @@
 #include "Map.h"
 using namespace sf;
 
-Player::Player()
+Player::Player(String File, float X, float Y, float W, float H)
 {
 	File;
 	w = W; h = H;
@@ -42,7 +42,7 @@ Player::~Player()
 {
 }
 
-Player::Player(String File, float X, float Y, float W, float H)
+Player::Player()
 {
 }
 
