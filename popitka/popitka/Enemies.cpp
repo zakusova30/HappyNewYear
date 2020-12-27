@@ -29,6 +29,10 @@ void Child_Enemies::drawing(float pX, float pY, Player & playerhp)
 	if (dy < 0) sprite.setTextureRect(IntRect(32 * int(CurrentFrame), 64, 32, 32));
 	if (dy > 0) sprite.setTextureRect(IntRect(32 * int(CurrentFrame) + 32, 32, -32, 32));
 	window.draw(sprite);
+
+	if ((pY >= (rect.top - 15)) && (pY <= (rect.top + 32 + 15)) && (pX >= (rect.left - 15) && (pX <= (rect.left + 32 + 15)))) {
+		playerhp.Damage();
+	}
 }
 
 Girl::Girl(int x, int y)
