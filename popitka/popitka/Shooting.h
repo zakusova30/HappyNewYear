@@ -47,7 +47,7 @@ public:
 		int direction;
 		float dx, dy;
 		Bullet(FloatRect rect, float loc_dx);
-		void WithMap();
+		void WithMap(); //взаимодействие с картой
 		~Bullet();
 
 		void WithPlayer(Player &p);
