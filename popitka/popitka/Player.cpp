@@ -43,10 +43,14 @@ float Player::GetPlayerCoordinateY() {
 
 void Player::Damage() 
 {
+	hp--;
+	return;
 }
 
 void Player::bDamage() 
 {
+	hp -= 20;
+	return;
 }
 
 void Player::Keys() 
