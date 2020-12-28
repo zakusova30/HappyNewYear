@@ -112,6 +112,36 @@ int main() // главна€ функци€
 		m.drawing(); //рисуетс€ карта (пока окно открыто)
 		z.draw_p(); //рисуетс€ игрок
 
+		for (cc = child.begin(); cc != child.end(); cc++) {
+			(*cc)->drawing(z.GetPlayerCoordinateX(), z.GetPlayerCoordinateY(), z);
+		}
+
+		for (shh = shoott.begin(); shh != shoott.end(); shh++) {
+			(*сс)->draw();
+
+
+			if ((*shh)->shoot > 300) {
+				(*shh)->shoot = 0;
+				FloatRect polozh = (*shh)->position();
+				float uskor = (*shh)->acceleration();
+				bullets.push_back(new Shooting::Bullet(polozh, uskor));
+			}
+			(*shh)->shoot++; //новые пули вылетают
+		}
+
+		for (bul = bullets.begin(); bul != bullets.end(); bul++) {
+			if ((*bul)->life) {
+
+				(*bul)->WithPlayer(z); //взаимодействие пуль с игроком
+				(*bul)->drawing();
+			}
+			else {
+				delete((*bul)); //пул€ удал€етс€ удар€€сь об стену, взамен выходит нова€
+				bullets.remove(*bul);
+				break;
+			}
+		}
+
 
 		text.setString("«ƒќ–ќ¬№≈:");
 		text.setPosition(5, 0);
