@@ -76,17 +76,55 @@ int main() // главная функция
 		}
 	}
 
-	sf::Event event;
-	while (window.pollEvent(event))
+
+	Font font;  // шрифт
+	font.loadFromFile("Ben_Krush.ttf");
+	Text text("", font, 20); // размер текста
+	text.setStyle(sf::Text::Bold); // стиль текста
+
+	while (window.isOpen()) // пока окно отрыто
 	{
-		if (event.type == sf::Event::Closed)
+		if (z.win >= 1) //в случае победы появляется окно победы
+		{
 			window.close();
+			RenderWindow window(sf::VideoMode(789, 514), "WIN");
+			winner(window);
+			while (!Mouse::isButtonPressed(Mouse::Right));
+		}
+		if (z.hp <= 0) // в случае проигрыша появляется окно  проигрыша
+		{
+			window.close();
+			RenderWindow window(sf::VideoMode(1000, 667), "LOSE");
+			lose(window);
+			while (!Mouse::isButtonPressed(Mouse::Right));
+		}
 
+
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+
+		}
+		window.clear(Color(33, 30, 30));
+
+		m.drawing(); //рисуется карта (пока окно открыто)
+		z.draw_p(); //рисуется игрок
+
+
+		text.setString("ЗДОРОВЬЕ:");
+		text.setPosition(5, 0);
+		window.draw(text);
+		window.draw(z.hpbar);
+
+
+		text.setString("КЛЮЧИ:");
+		text.setPosition(800, 0);
+		window.draw(text);
+		window.draw(z.keybar);
+		window.display();
 	}
-	window.clear(Color(33, 30, 30));
-
-	m.drawing(); //рисуется карта (пока окно открыто)
-	z.draw_p(); //рисуется игрок
 
 	return 0;
 }
