@@ -87,6 +87,19 @@ int main()
 
 	while (window.isOpen()) // пока окно отрыто
 	{
+
+		text.setString("ЗДОРОВЬЕ:");
+		text.setPosition(5, 0);
+		window.draw(text);
+		window.draw(z.hpbar);
+
+
+		text.setString("КЛЮЧИ:");
+		text.setPosition(800, 0);
+		window.draw(text);
+		window.draw(z.keybar);
+		window.display();
+
 		if (z.win >= 1) //в случае победы появляется окно победы
 		{
 			window.close();
@@ -154,18 +167,6 @@ int main()
 
 
 
-
-		text.setString("ЗДОРОВЬЕ:");
-		text.setPosition(5, 0);
-		window.draw(text);
-		window.draw(z.hpbar);
-
-
-		text.setString("КЛЮЧИ:");
-		text.setPosition(800, 0);
-		window.draw(text);
-		window.draw(z.keybar);
-		window.display();
 
 
 	}
