@@ -87,8 +87,24 @@ int main()
 
 	while (window.isOpen()) // пока окно отрыто
 	{
+
+		text.setString("ЗДОРОВЬЕ:");
+		text.setPosition(5, 0);
+		window.draw(text);
+		window.draw(z.hpbar);
+
+
+		text.setString("КЛЮЧИ:");
+		text.setPosition(800, 0);
+		window.draw(text);
+		window.draw(z.keybar);
+		window.display();
+
 		if (z.win >= 1) //в случае победы появляется окно победы
 		{
+			child.clear();
+			shoott.clear();
+			bullets.clear();
 			window.close();
 			RenderWindow window(sf::VideoMode(789, 514), "WIN");
 			winner(window);
@@ -96,6 +112,9 @@ int main()
 		}
 		if (z.hp <= 0) // в случае проигрыша появляется окно  проигрыша
 		{
+			child.clear();
+			shoott.clear();
+			bullets.clear();
 			window.close();
 			RenderWindow window(sf::VideoMode(1000, 667), "LOSE");
 			lose(window);
@@ -154,18 +173,6 @@ int main()
 
 
 
-
-		text.setString("ЗДОРОВЬЕ:");
-		text.setPosition(5, 0);
-		window.draw(text);
-		window.draw(z.hpbar);
-
-
-		text.setString("КЛЮЧИ:");
-		text.setPosition(800, 0);
-		window.draw(text);
-		window.draw(z.keybar);
-		window.display();
 
 
 	}
