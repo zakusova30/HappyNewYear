@@ -1,16 +1,16 @@
 #include <iostream>
 #include <SFML/Graphics.hpp> /// подключаем заголовочный файл, который отвечает за работу с графикой
-#include "Map.h"
-#include "Globals.h"
-#include "Player.h"
+#include "map.h"
+#include "globals.h"
+#include "player.h"
 #include "Enemies.h"
-#include "Shooting.h"
 #include <list>
+#include "Shooting.h"
 
 using namespace std;
 using namespace sf;
 
-void winner(RenderWindow & window) // если игрок победит
+void winner(RenderWindow & window) // пояление окна победителя
 {
 	Texture winning_screen;
 	winning_screen.loadFromFile("images/win.png"); // загружаем изображение 
@@ -21,7 +21,8 @@ void winner(RenderWindow & window) // если игрок победит
 	window.display(); // выводим на экран
 }
 
-void lose(RenderWindow & window) // если игрок проишрает 
+
+void lose(RenderWindow & window)  // появление окна проигравшего
 {
 	Texture losee;
 	losee.loadFromFile("images/lose.jpg");
@@ -32,7 +33,9 @@ void lose(RenderWindow & window) // если игрок проишрает
 	window.display();
 }
 
-int main() // главная функция
+
+
+int main()
 {
 	Map drawing;
 	Player z("santa.png", 48, 48, 23.0, 23.0);
@@ -100,6 +103,10 @@ int main() // главная функция
 		}
 
 
+
+
+
+
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
@@ -109,6 +116,7 @@ int main() // главная функция
 		}
 		window.clear(Color(33, 30, 30));
 
+
 		m.drawing(); //рисуется карта (пока окно открыто)
 		z.draw_p(); //рисуется игрок
 
@@ -117,7 +125,7 @@ int main() // главная функция
 		}
 
 		for (shh = shoott.begin(); shh != shoott.end(); shh++) {
-			(*сс)->draw();
+			(*shh)->draw();
 
 
 			if ((*shh)->shoot > 300) {
@@ -143,6 +151,10 @@ int main() // главная функция
 		}
 
 
+
+
+
+
 		text.setString("ЗДОРОВЬЕ:");
 		text.setPosition(5, 0);
 		window.draw(text);
@@ -154,6 +166,8 @@ int main() // главная функция
 		window.draw(text);
 		window.draw(z.keybar);
 		window.display();
+
+
 	}
 
 	return 0;
