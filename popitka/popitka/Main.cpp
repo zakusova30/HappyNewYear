@@ -102,19 +102,23 @@ int main()
 
 		if (z.win >= 1) //в случае победы появляется окно победы
 		{
+			child.clear();
+			shoott.clear();
+			bullets.clear();
 			window.close();
 			RenderWindow window(sf::VideoMode(789, 514), "WIN");
 			winner(window);
 			while (!Mouse::isButtonPressed(Mouse::Right));
-			window.close();
 		}
 		if (z.hp <= 0) // в случае проигрыша появляется окно  проигрыша
 		{
+			child.clear();
+			shoott.clear();
+			bullets.clear();
 			window.close();
 			RenderWindow window(sf::VideoMode(1000, 667), "LOSE");
 			lose(window);
 			while (!Mouse::isButtonPressed(Mouse::Right));
-			window.close();
 		}
 
 
