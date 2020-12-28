@@ -7,7 +7,19 @@
 
 void Child_Enemies::checkCollisionWithMap()
 {
-
+	for (int i = (rect.top) / 32; i < (rect.top + 32) / 32; i++)
+		for (int j = (rect.left) / 32; j < (rect.left + 32) / 32; j++)
+		{
+			if (TileMap[i][j] == '0' || TileMap[i][j] == '1' || TileMap[i][j] == 'e' || TileMap[i][j] == 'y' || TileMap[i][j] == 'w' || TileMap[i][j] == 'm')
+			{
+				if (dx > 0) { rect.left = j * 32 - 32; }
+				if (dx < 0) { rect.left = j * 32 + 32; }
+				dx = dx * -1;
+				if (dy > 0) { rect.top = i * 32 - 32; }
+				if (dy < 0) { rect.top = i * 32 + 32; }
+				dy = dy * -1;
+			}
+		}
 }
 
 void Child_Enemies::drawing(float pX, float pY, Player & playerhp)
