@@ -1,12 +1,36 @@
-#include "SFML/Graphics.hpp" 
+#include "SFML/Graphics.hpp"  /// подключаем заголовочный файл, который отвечает за работу с графикой
 #include <iostream> 
 #include "Map.h" 
-#include "Globals.h" 
-#include "Enemies.h"
-#include "Player.h"  
+#include "globals.h" 
+#include "Enemies.h" 
+#include "Player.h" 
+
+
+
+Boy::Boy(int x, int y) {
+	t.loadFromFile("images/boy.png");
+	sprite.setTexture(t);
+	sprite.setTextureRect(IntRect(0, 0, 23, 23));
+	rect = FloatRect(x * 32, y * 32, 0, 0);
+	dy = -0.08;
+}
+
+
+Girl::Girl(int x, int y)
+{
+	t.loadFromFile("images/girl.png");
+	sprite.setTexture(t);
+	sprite.setTextureRect(IntRect(0, 0, 23, 23));
+	rect = FloatRect(x * 32, y * 32, 0, 0);
+	dx = -0.05;
+}
+
+
+
 
 void Child_Enemies::checkCollisionWithMap()
 {
+
 	for (int i = (rect.top) / 32; i < (rect.top + 32) / 32; i++)
 		for (int j = (rect.left) / 32; j < (rect.left + 32) / 32; j++)
 		{
@@ -22,6 +46,7 @@ void Child_Enemies::checkCollisionWithMap()
 		}
 }
 
+
 void Child_Enemies::drawing(float pX, float pY, Player & playerhp)
 {
 	time = clock.getElapsedTime().asMicroseconds();
@@ -34,33 +59,23 @@ void Child_Enemies::drawing(float pX, float pY, Player & playerhp)
 
 	rect.left = rect.left + dx * time;
 	rect.top = rect.top + dy * time;
+	checkCollisionWithMap();
+
 	CurrentFrame += 0.005 * time;
 	if (CurrentFrame > 3) CurrentFrame -= 3;
 	if (dx < 0) sprite.setTextureRect(IntRect(32 * int(CurrentFrame) + 0, 32, 32, 32));
 	if (dx > 0) sprite.setTextureRect(IntRect(32 * int(CurrentFrame) + 0, 64, 32, 32));
 	if (dy < 0) sprite.setTextureRect(IntRect(32 * int(CurrentFrame), 64, 32, 32));
 	if (dy > 0) sprite.setTextureRect(IntRect(32 * int(CurrentFrame) + 32, 32, -32, 32));
+
+
+
 	window.draw(sprite);
 
 	if ((pY >= (rect.top - 15)) && (pY <= (rect.top + 32 + 15)) && (pX >= (rect.left - 15) && (pX <= (rect.left + 32 + 15)))) {
 		playerhp.Damage();
 	}
+
 }
 
-Girl::Girl(int x, int y)
-{
-	t.loadFromFile("images/girl.png");
-	sprite.setTexture(t);
-	sprite.setTextureRect(IntRect(0, 0, 23, 23));
-	rect = FloatRect(x * 32, y * 32, 0, 0);
-	dx = -0.05;
-}
 
-Boy::Boy(int x, int y) 
-{
-	t.loadFromFile("images/boy.png");
-	sprite.setTexture(t);
-	sprite.setTextureRect(IntRect(0, 0, 23, 23));
-	rect = FloatRect(x * 32, y * 32, 0, 0);
-	dy = -0.08;
-}

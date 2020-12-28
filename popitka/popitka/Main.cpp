@@ -1,16 +1,16 @@
 #include <iostream>
 #include <SFML/Graphics.hpp> /// подключаем заголовочный файл, который отвечает за работу с графикой
-#include "Map.h"
-#include "Globals.h"
-#include "Player.h"
+#include "map.h"
+#include "globals.h"
+#include "player.h"
 #include "Enemies.h"
-#include "Shooting.h"
 #include <list>
+#include "Shooting.h"
 
 using namespace std;
 using namespace sf;
 
-void winner(RenderWindow & window) // если игрок победит
+void winner(RenderWindow & window) // по€ление окна победител€
 {
 	Texture winning_screen;
 	winning_screen.loadFromFile("images/win.png"); // загружаем изображение 
@@ -21,7 +21,8 @@ void winner(RenderWindow & window) // если игрок победит
 	window.display(); // выводим на экран
 }
 
-void lose(RenderWindow & window) // если игрок проишрает 
+
+void lose(RenderWindow & window)  // по€вление окна проигравшего
 {
 	Texture losee;
 	losee.loadFromFile("images/lose.jpg");
@@ -32,7 +33,9 @@ void lose(RenderWindow & window) // если игрок проишрает
 	window.display();
 }
 
-int main() // главна€ функци€
+
+
+int main()
 {
 	Map drawing;
 	Player z("santa.png", 48, 48, 23.0, 23.0);
@@ -100,6 +103,10 @@ int main() // главна€ функци€
 		}
 
 
+
+
+
+
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
@@ -109,8 +116,43 @@ int main() // главна€ функци€
 		}
 		window.clear(Color(33, 30, 30));
 
+
 		m.drawing(); //рисуетс€ карта (пока окно открыто)
 		z.draw_p(); //рисуетс€ игрок
+
+		for (cc = child.begin(); cc != child.end(); cc++) {
+			(*cc)->drawing(z.GetPlayerCoordinateX(), z.GetPlayerCoordinateY(), z);
+		}
+
+		for (shh = shoott.begin(); shh != shoott.end(); shh++) {
+			(*shh)->draw();
+
+
+			if ((*shh)->shoot > 300) {
+				(*shh)->shoot = 0;
+				FloatRect polozh = (*shh)->position();
+				float uskor = (*shh)->acceleration();
+				bullets.push_back(new Shooting::Bullet(polozh, uskor));
+			}
+			(*shh)->shoot++; //новые пули вылетают
+		}
+
+		for (bul = bullets.begin(); bul != bullets.end(); bul++) {
+			if ((*bul)->life) {
+
+				(*bul)->WithPlayer(z); //взаимодействие пуль с игроком
+				(*bul)->drawing();
+			}
+			else {
+				delete((*bul)); //пул€ удал€етс€ удар€€сь об стену, взамен выходит нова€
+				bullets.remove(*bul);
+				break;
+			}
+		}
+
+
+
+
 
 
 		text.setString("«ƒќ–ќ¬№≈:");
@@ -124,6 +166,8 @@ int main() // главна€ функци€
 		window.draw(text);
 		window.draw(z.keybar);
 		window.display();
+
+
 	}
 
 	return 0;
